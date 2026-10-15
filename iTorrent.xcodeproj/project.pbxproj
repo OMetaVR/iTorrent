@@ -1860,7 +1860,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+			shellScript = "# Upload dSYMs to Crashlytics, only when built with a real GoogleService-Info.plist.\nif /usr/libexec/PlistBuddy -c \"Print :GOOGLE_APP_ID\" \"${SRCROOT}/iTorrent/Core/Assets/GoogleService-Info.plist\" >/dev/null 2>&1; then\n  \"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
