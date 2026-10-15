@@ -10,6 +10,7 @@ import Combine
 import MvvmFoundation
 import UIKit
 #if canImport(FirebaseCrashlytics)
+import FirebaseCore
 import FirebaseCrashlytics
 #endif
 
@@ -130,7 +131,11 @@ extension TorrentService: SessionDelegate {
 
     func torrentManager(_ manager: Session, didErrorOccur error: Error) {
         #if canImport(FirebaseCrashlytics)
-        Crashlytics.crashlytics().record(error: error)
+        if FirebaseApp.app() != nil {
+            Crashlytics.crashlytics().record(error: error)
+        } else {
+            print("LibTorrent error: \(error)")
+        }
         #else
         print("LibTorrent error: \(error)")
         #endif

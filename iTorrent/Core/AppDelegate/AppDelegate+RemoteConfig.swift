@@ -14,6 +14,7 @@ let remoteConfig = RemoteConfig.remoteConfig()
 extension AppDelegate {
     func registerRemoteConfig() {
 #if canImport(FirebaseRemoteConfig)
+        guard isFirebaseAvailable else { return }
         registerKillSwitch()
 #endif
     }
